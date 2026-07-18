@@ -139,9 +139,9 @@ a:focus-visible {
 
 .entry-nav {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
-  width: min(52vw, 760px);
+  width: min(38vw, 520px);
   margin: 0 auto clamp(18px, 3.2vh, 40px);
   gap: clamp(18px, 3vw, 56px);
   color: var(--ink);
@@ -456,7 +456,7 @@ a:focus-visible {
   }
 
   .entry-nav {
-    width: 82vw;
+    width: 56vw;
     gap: 12px;
     font-size: 12px;
     letter-spacing: 0.2em;
@@ -509,7 +509,7 @@ a:focus-visible {
   }
 
   .entry-nav {
-    width: 88vw;
+    width: 64vw;
     gap: 8px;
     margin-bottom: 12px;
     font-size: 10px;
