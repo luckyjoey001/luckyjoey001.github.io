@@ -275,7 +275,10 @@ a:focus-visible {
 
 .profile-poster {
   grid-template-rows: auto 1fr auto;
+  height: 100svh;
+  min-height: 100svh;
   padding: 0;
+  overflow: hidden;
 }
 
 .profile-poster .frame {
@@ -286,13 +289,13 @@ a:focus-visible {
 .profile-poster .poster-header {
   position: relative;
   z-index: 2;
-  padding: clamp(28px, 4vw, 60px) clamp(28px, 4vw, 60px) 0;
+  padding: clamp(20px, 2.6vw, 44px) clamp(28px, 4vw, 60px) 0;
 }
 
 .profile-poster .entry-nav {
   position: relative;
   z-index: 2;
-  padding-bottom: clamp(28px, 4vw, 60px);
+  padding-bottom: clamp(20px, 2.6vw, 44px);
   margin-bottom: 0;
 }
 
@@ -300,6 +303,7 @@ a:focus-visible {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 100%;
   min-height: 0;
   overflow: hidden;
 }
@@ -310,15 +314,18 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(40px, 5vw, 80px);
+  height: 100%;
+  min-height: 0;
+  padding: clamp(20px, 2.4vw, 40px);
   background: var(--paper);
   overflow: hidden;
 }
 
 /*
- * 照片尺寸策略：
- * 以视口高度为基准等比缩放，width/height 均为 auto，
- * 用 max-width / max-height 双向约束，确保任何屏幕下都不溢出容器。
+ * 照片尺寸策略（一屏版）：
+ * 照片高度跟随父容器实际可用高度，width/height 均为 auto，
+ * 用 max-width: 100% / max-height: 100% 双向约束，
+ * 确保任何屏幕下都不溢出容器且整页保持一屏。
  * object-fit: contain 保证原图比例不被拉伸。
  */
 .profile-photo {
@@ -326,12 +333,12 @@ a:focus-visible {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: min(70vh, 700px);
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
   box-shadow:
     0 1px 2px rgba(13, 13, 12, 0.04),
-    0 12px 40px rgba(13, 13, 12, 0.08);
+    0 10px 32px rgba(13, 13, 12, 0.08);
 }
 
 /* Right text column — 纸色，开阔的文字空间 */
@@ -339,12 +346,14 @@ a:focus-visible {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: clamp(28px, 4.5vh, 52px);
-  padding: clamp(40px, 5vw, 84px) clamp(44px, 5.5vw, 88px);
+  justify-content: flex-start;
+  gap: clamp(14px, 2vh, 24px);
+  height: 100%;
+  min-height: 0;
+  padding: clamp(22px, 2.8vw, 44px) clamp(28px, 3.5vw, 56px);
   background: var(--paper);
   color: var(--ink);
-  overflow-y: auto;
+  overflow: hidden;
   border-left: 1px solid var(--line);
 }
 
@@ -387,22 +396,43 @@ a:focus-visible {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  min-height: 0;
+  overflow: hidden;
   max-width: 560px;
+}
+
+.profile-intro {
+  flex-shrink: 0;
+}
+
+.profile-experience {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.profile-experience .lang-panel {
+  height: 100%;
+  min-height: 0;
+}
+
+.profile-experience .lang-panel[hidden] {
+  display: none;
 }
 
 .profile-wordmark {
   display: block;
   width: auto;
-  max-width: min(280px, 58%);
+  max-width: min(210px, 52%);
   height: auto;
-  margin: 0 0 clamp(16px, 2.4vh, 28px);
+  margin: 0 0 clamp(8px, 1.2vh, 14px);
 }
 
 .profile-subtitle {
-  margin: 0 0 clamp(32px, 5vh, 56px);
+  margin: 0 0 clamp(14px, 2.2vh, 24px);
   color: var(--muted);
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(12px, 0.9vw, 14px);
   letter-spacing: 0.18em;
 }
 
@@ -415,26 +445,26 @@ a:focus-visible {
 }
 
 .profile-body {
-  margin: 0 0 clamp(28px, 4vh, 42px);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.85;
+  margin: 0 0 clamp(14px, 2.2vh, 24px);
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.65;
   color: var(--ink);
 }
 
 .profile-list {
   margin: 0;
-  padding: 0;
+  padding: 0 0 4px;
   list-style: none;
   color: var(--ink);
-  font-size: clamp(13px, 0.95vw, 15px);
-  line-height: 1.6;
+  font-size: clamp(12px, 0.86vw, 13.5px);
+  line-height: 1.45;
 }
 
 .profile-list li {
   display: grid;
-  grid-template-columns: clamp(72px, 8vw, 90px) 1fr;
-  gap: clamp(12px, 1.5vw, 18px);
-  padding: 12px 0;
+  grid-template-columns: clamp(68px, 7vw, 84px) 1fr;
+  gap: clamp(10px, 1.2vw, 16px);
+  padding: 7px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -456,71 +486,40 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.profile-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin: 0;
-  color: var(--muted);
-  font-size: clamp(11px, 0.85vw, 13px);
-  letter-spacing: 0.24em;
-  flex-shrink: 0;
-}
-
-.profile-footer a {
-  color: var(--muted);
-  transition: color 180ms ease;
-}
-
-.profile-footer a:hover {
-  color: var(--ink);
-}
-
 /* Profile responsive */
 @media (max-width: 1280px) {
-  .profile-photo {
-    max-height: min(66vh, 640px);
-  }
-
   .profile-text {
-    padding: clamp(36px, 4.5vw, 72px) clamp(36px, 4.5vw, 64px);
+    padding: clamp(20px, 2.6vw, 40px) clamp(28px, 3.4vw, 48px);
   }
 }
 
 @media (max-width: 1024px) {
-  .profile-photo {
-    max-height: min(60vh, 560px);
-  }
-
   .profile-visual {
-    padding: clamp(32px, 4vw, 56px);
+    padding: clamp(18px, 2.4vw, 32px);
   }
 
   .profile-text {
-    padding: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 48px);
+    padding: clamp(18px, 2.4vw, 32px) clamp(24px, 3vw, 40px);
   }
 
   .profile-wordmark {
-    max-width: min(240px, 54%);
+    max-width: min(190px, 50%);
   }
 }
 
 @media (max-width: 900px) {
   .profile-split {
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 42vh) 1fr;
   }
 
   .profile-visual {
-    padding: clamp(36px, 7vw, 56px);
+    padding: clamp(20px, 4vw, 32px);
     border-bottom: 1px solid var(--line);
   }
 
-  .profile-photo {
-    max-height: 52vh;
-  }
-
   .profile-text {
-    padding: clamp(36px, 7vw, 56px) clamp(28px, 6vw, 44px);
+    padding: clamp(20px, 3.6vw, 32px) clamp(24px, 4vw, 36px);
     border-left: none;
   }
 
@@ -529,26 +528,23 @@ a:focus-visible {
   }
 
   .profile-wordmark {
-    max-width: min(260px, 52%);
+    max-width: min(220px, 48%);
   }
 }
 
 @media (max-width: 560px) {
   .profile-visual {
-    padding: clamp(28px, 6vw, 40px);
-  }
-
-  .profile-photo {
-    max-height: 46vh;
+    padding: clamp(16px, 3.5vw, 24px);
   }
 
   .profile-list li {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 2px;
+    padding: 6px 0;
   }
 
   .profile-list-date {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
