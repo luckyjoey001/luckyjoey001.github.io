@@ -17,3 +17,24 @@
     });
   });
 })();
+
+// Profile page: bilingual language switch (中 / EN).
+(function () {
+  const switchBtn = document.querySelector(".lang-switch");
+  const panels = document.querySelectorAll(".lang-panel");
+  if (!switchBtn || !panels.length) return;
+
+  switchBtn.addEventListener("click", () => {
+    const current = switchBtn.dataset.active || "en";
+    const next = current === "en" ? "zh" : "en";
+
+    switchBtn.dataset.active = next;
+    switchBtn.setAttribute("aria-label", next === "zh" ? "切换到 English" : "切换到中文");
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.lang === next;
+      panel.dataset.active = isActive ? "true" : "false";
+      panel.hidden = !isActive;
+    });
+  });
+})();

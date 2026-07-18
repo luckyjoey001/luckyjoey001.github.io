@@ -271,6 +271,287 @@ a:focus-visible {
   margin-bottom: 0;
 }
 
+/* ---- Profile split layout ---- */
+
+.profile-poster {
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
+}
+
+.profile-poster .frame {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.profile-poster .poster-header {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 4vw, 60px) clamp(28px, 4vw, 60px) 0;
+}
+
+.profile-poster .entry-nav {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(28px, 4vw, 60px);
+  margin-bottom: 0;
+}
+
+.profile-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Left visual column — 照片作为画廊作品，纸色留白 */
+.profile-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 80px);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+/*
+ * 照片尺寸策略：
+ * 以视口高度为基准等比缩放，width/height 均为 auto，
+ * 用 max-width / max-height 双向约束，确保任何屏幕下都不溢出容器。
+ * object-fit: contain 保证原图比例不被拉伸。
+ */
+.profile-photo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(70vh, 700px);
+  object-fit: contain;
+  object-position: center;
+  box-shadow:
+    0 1px 2px rgba(13, 13, 12, 0.04),
+    0 12px 40px rgba(13, 13, 12, 0.08);
+}
+
+/* Right text column — 纸色，开阔的文字空间 */
+.profile-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(28px, 4.5vh, 52px);
+  padding: clamp(40px, 5vw, 84px) clamp(44px, 5.5vw, 88px);
+  background: var(--paper);
+  color: var(--ink);
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+}
+
+.profile-text-top {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.lang-switch {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: clamp(12px, 0.95vw, 14px);
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.lang-switch:hover {
+  color: var(--ink);
+}
+
+.lang-switch span {
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.lang-switch[data-active="en"] [data-lang="en"],
+.lang-switch[data-active="zh"] [data-lang="zh"] {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.profile-text-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 560px;
+}
+
+.profile-wordmark {
+  display: block;
+  width: auto;
+  max-width: min(280px, 58%);
+  height: auto;
+  margin: 0 0 clamp(16px, 2.4vh, 28px);
+}
+
+.profile-subtitle {
+  margin: 0 0 clamp(32px, 5vh, 56px);
+  color: var(--muted);
+  font-size: clamp(13px, 1vw, 16px);
+  letter-spacing: 0.18em;
+}
+
+.lang-panel {
+  max-width: 520px;
+}
+
+.lang-panel[hidden] {
+  display: none;
+}
+
+.profile-body {
+  margin: 0 0 clamp(28px, 4vh, 42px);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.85;
+  color: var(--ink);
+}
+
+.profile-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.6;
+}
+
+.profile-list li {
+  display: grid;
+  grid-template-columns: clamp(72px, 8vw, 90px) 1fr;
+  gap: clamp(12px, 1.5vw, 18px);
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.profile-list li:first-child {
+  border-top: 1px solid var(--muted);
+}
+
+.profile-list li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-list-date {
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.profile-list-event {
+  color: var(--ink);
+}
+
+.profile-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(11px, 0.85vw, 13px);
+  letter-spacing: 0.24em;
+  flex-shrink: 0;
+}
+
+.profile-footer a {
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.profile-footer a:hover {
+  color: var(--ink);
+}
+
+/* Profile responsive */
+@media (max-width: 1280px) {
+  .profile-photo {
+    max-height: min(66vh, 640px);
+  }
+
+  .profile-text {
+    padding: clamp(36px, 4.5vw, 72px) clamp(36px, 4.5vw, 64px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .profile-photo {
+    max-height: min(60vh, 560px);
+  }
+
+  .profile-visual {
+    padding: clamp(32px, 4vw, 56px);
+  }
+
+  .profile-text {
+    padding: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 48px);
+  }
+
+  .profile-wordmark {
+    max-width: min(240px, 54%);
+  }
+}
+
+@media (max-width: 900px) {
+  .profile-split {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-visual {
+    padding: clamp(36px, 7vw, 56px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .profile-photo {
+    max-height: 52vh;
+  }
+
+  .profile-text {
+    padding: clamp(36px, 7vw, 56px) clamp(28px, 6vw, 44px);
+    border-left: none;
+  }
+
+  .profile-text-body {
+    max-width: 640px;
+  }
+
+  .profile-wordmark {
+    max-width: min(260px, 52%);
+  }
+}
+
+@media (max-width: 560px) {
+  .profile-visual {
+    padding: clamp(28px, 6vw, 40px);
+  }
+
+  .profile-photo {
+    max-height: 46vh;
+  }
+
+  .profile-list li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .profile-list-date {
+    font-size: 12px;
+  }
+}
+
 /* ---- Calligraphy archive (sub-page framework) ---- */
 
 .archive-poster {
