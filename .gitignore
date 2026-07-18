@@ -1,0 +1,5 @@
+# Project memory / assistant data (not part of the website)
+.workbuddy/
+
+# macOS
+.DS_Store

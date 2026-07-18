@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calligraphy | JOEYLU</title>
+    <meta
+      name="description"
+      content="Calligraphy archive and works by JOEYLU — ink, paper, pressure, speed, and silence."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="poster section-poster archive-poster" aria-labelledby="page-title">
+      <div class="frame" aria-hidden="true"></div>
+
+      <header class="poster-header">
+        <div class="header-stack">
+          <a href="index.html">HOME</a>
+          <a href="calligraphy.html" aria-current="page">CALLIGRAPHY</a>
+        </div>
+        <div class="header-stack align-right">
+          <a href="mailto:hello@example.com">CONTACT</a>
+          <span>CALLIGRAPHY / 02</span>
+        </div>
+      </header>
+
+      <section class="page-content">
+        <p class="kicker">INK / PAPER / BREATH</p>
+        <h1 id="page-title">CALLIGRAPHY</h1>
+        <p class="statement">
+          A restrained archive of ink, paper, pressure, speed, and silence —
+          gathered by script, breath, and season.
+        </p>
+
+        <!-- Featured work (always shown, not part of the filter) -->
+        <article class="work-feature">
+          <div class="work-frame wide">
+            <span class="work-glyph">書</span>
+            <span class="work-index">FEATURED / 01</span>
+          </div>
+          <div class="work-feature-meta">
+            <p class="work-kicker">FEATURED WORK</p>
+            <h2 class="work-title">《作品名》</h2>
+            <p class="work-sub">2025 · 行书 Running · 水墨宣纸 Ink on xuan paper</p>
+            <p class="body-copy">
+              A short curatorial note will live here — what was written, why,
+              and how the hand moved across the paper.
+            </p>
+          </div>
+        </article>
+
+        <!-- Filter bar by script style -->
+        <div class="work-filters" role="group" aria-label="Filter by script style">
+          <button class="work-filter" data-filter="all" aria-pressed="true">
+            ALL / 全部
+          </button>
+          <button class="work-filter" data-filter="regular">楷书 Regular</button>
+          <button class="work-filter" data-filter="running">行书 Running</button>
+          <button class="work-filter" data-filter="cursive">草书 Cursive</button>
+          <button class="work-filter" data-filter="clerical">隶书 Clerical</button>
+          <button class="work-filter" data-filter="seal">篆书 Seal</button>
+        </div>
+
+        <!-- Works grid -->
+        <div class="work-grid">
+          <article class="work-card" data-style="regular">
+            <a class="work-frame" href="#">
+              <span class="work-glyph">永</span>
+              <span class="work-index">02</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2025 · 楷书 Regular</p>
+            </div>
+          </article>
+
+          <article class="work-card" data-style="running">
+            <a class="work-frame tall" href="#">
+              <span class="work-glyph">風</span>
+              <span class="work-index">03</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2025 · 行书 Running</p>
+            </div>
+          </article>
+
+          <article class="work-card" data-style="cursive">
+            <a class="work-frame" href="#">
+              <span class="work-glyph">雲</span>
+              <span class="work-index">04</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2024 · 草书 Cursive</p>
+            </div>
+          </article>
+
+          <article class="work-card" data-style="clerical">
+            <a class="work-frame tall" href="#">
+              <span class="work-glyph">靜</span>
+              <span class="work-index">05</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2024 · 隶书 Clerical</p>
+            </div>
+          </article>
+
+          <article class="work-card" data-style="seal">
+            <a class="work-frame" href="#">
+              <span class="work-glyph">道</span>
+              <span class="work-index">06</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2024 · 篆书 Seal</p>
+            </div>
+          </article>
+
+          <article class="work-card" data-style="running">
+            <a class="work-frame" href="#">
+              <span class="work-glyph">心</span>
+              <span class="work-index">07</span>
+            </a>
+            <div class="work-meta">
+              <h3 class="work-title">《作品名》</h3>
+              <p class="work-sub">2023 · 行书 Running</p>
+            </div>
+          </article>
+        </div>
+
+        <a class="return-link" href="index.html">BACK TO HOME</a>
+      </section>
+
+      <nav class="entry-nav sub-nav" aria-label="Section navigation">
+        <a href="profile.html">PROFILE</a>
+        <a href="calligraphy.html" aria-current="page">CALLIGRAPHY</a>
+        <a href="photography.html">PHOTOGRAPHY</a>
+      </nav>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
