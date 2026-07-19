@@ -594,11 +594,11 @@ a:focus-visible {
   min-height: 100svh;
   height: 100svh;
   overflow: hidden;
-  padding: clamp(32px, 4.5vw, 64px) clamp(48px, 6vw, 96px);
+  padding: clamp(28px, 3.5vw, 48px) clamp(40px, 5vw, 72px);
 }
 
 .archive-poster .poster-header {
-  padding-bottom: clamp(24px, 3.5vh, 44px);
+  padding-bottom: clamp(14px, 2vh, 24px);
 }
 
 .archive-poster .header-stack {
@@ -643,7 +643,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: clamp(16px, 2.2vw, 32px);
-  padding: clamp(8px, 1.2vh, 16px) 0 clamp(40px, 5.5vh, 64px);
+  padding: clamp(2px, 0.6vh, 6px) 0 clamp(14px, 2.2vh, 24px);
 }
 
 .gallery-wordmark {
@@ -655,10 +655,11 @@ a:focus-visible {
 }
 
 .gallery-label {
-  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
-  font-size: clamp(13px, 1.05vw, 16px);
+  font-family: "Cormorant", "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-style: normal;
+  font-size: clamp(10px, 0.8vw, 13px);
   font-weight: 400;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.58em;
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
@@ -673,10 +674,18 @@ a:focus-visible {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(200px, 240px) 1fr;
-  gap: clamp(56px, 7vw, 104px);
+  grid-template-columns: clamp(48px, 5vw, 80px) minmax(178px, 206px) 1fr;
+  gap: clamp(16px, 1.8vw, 28px);
   overflow: hidden;
   padding: 0 0 clamp(4px, 1vh, 12px);
+}
+
+.gallery-list {
+  grid-column: 2;
+}
+
+.gallery-stage {
+  grid-column: 3;
 }
 
 /* Left: thumb list — independently scrollable, page stays put */
@@ -688,7 +697,7 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 4px 12px 4px 4px;
+  padding: 4px 4px 4px 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
   overscroll-behavior: contain;
@@ -711,8 +720,8 @@ a:focus-visible {
   position: relative;
   appearance: none;
   display: grid;
-  grid-template-columns: 20px 80px 1fr;
-  column-gap: 12px;
+  grid-template-columns: 18px 74px 1fr;
+  column-gap: 10px;
   row-gap: 2px;
   align-items: start;
   padding: 8px 6px 8px 8px;
@@ -749,7 +758,7 @@ a:focus-visible {
 /* Thumbnail image — no border, no frame, contain (no crop) */
 .thumb-img-wrap {
   display: block;
-  width: 80px;
+  width: 74px;
   aspect-ratio: 2 / 3;
   overflow: hidden;
   background: var(--paper);
@@ -850,9 +859,10 @@ a:focus-visible {
 
 .stage-title {
   margin: 0;
-  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
-  font-size: clamp(20px, 1.7vw, 26px);
+  font-family: "Playfair Display", "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-size: clamp(22px, 1.9vw, 30px);
   font-weight: 500;
+  letter-spacing: 0.04em;
   line-height: 1.2;
   color: var(--ink);
 }
@@ -953,6 +963,7 @@ a:focus-visible {
   }
 
   .gallery-list {
+    grid-column: auto;
     overflow-x: auto;
     overflow-y: hidden;
     height: auto;
@@ -963,6 +974,10 @@ a:focus-visible {
     scroll-snap-type: x mandatory;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-stage {
+    grid-column: auto;
   }
 
   .gallery-thumb {
