@@ -84,6 +84,7 @@
       size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
     },
     "12": {
+      title: "飞流直下三千尺\n疑是银河落九天",
       line: "2025 · 草书",
       size: "21 × 29 cm · 水墨宣纸 Ink on xuan paper",
     },
@@ -107,7 +108,7 @@
       size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
     },
     "17": {
-      title: "每个情绪都标明了颜色，或哭或笑，都是甜色",
+      title: "每个情绪都标明了颜色\n或哭或笑，都是甜色",
       line: "2025 · 行草",
       size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
     },
