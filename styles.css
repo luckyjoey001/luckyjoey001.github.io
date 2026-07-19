@@ -643,7 +643,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: clamp(16px, 2.2vw, 32px);
-  padding: clamp(2px, 0.6vh, 6px) 0 clamp(14px, 2.2vh, 24px);
+  padding: 0 0 clamp(28px, 4.5vh, 48px);
 }
 
 .gallery-wordmark {
@@ -674,7 +674,7 @@ a:focus-visible {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: clamp(48px, 5vw, 80px) minmax(178px, 206px) 1fr;
+  grid-template-columns: clamp(24px, 3vw, 48px) minmax(178px, 206px) 1fr;
   gap: clamp(16px, 1.8vw, 28px);
   overflow: hidden;
   padding: 0 0 clamp(4px, 1vh, 12px);
@@ -785,8 +785,8 @@ a:focus-visible {
 }
 
 .thumb-title {
-  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
-  font-size: clamp(12px, 0.9vw, 14px);
+  font-family: "Ma Shan Zheng", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+  font-size: clamp(11px, 0.85vw, 13px);
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -859,11 +859,11 @@ a:focus-visible {
 
 .stage-title {
   margin: 0;
-  font-family: "Playfair Display", "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
-  font-size: clamp(22px, 1.9vw, 30px);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
+  font-family: "Ma Shan Zheng", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+  font-size: clamp(18px, 1.55vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
   color: var(--ink);
 }
 
@@ -962,6 +962,10 @@ a:focus-visible {
     height: 100%;
   }
 
+  .gallery-top {
+    padding-bottom: clamp(10px, 1.6vh, 16px);
+  }
+
   .gallery-list {
     grid-column: auto;
     overflow-x: auto;
@@ -969,8 +973,8 @@ a:focus-visible {
     height: auto;
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    padding: 4px 0 8px;
+    gap: 8px;
+    padding: 2px 0 6px;
     scroll-snap-type: x mandatory;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
@@ -982,12 +986,12 @@ a:focus-visible {
 
   .gallery-thumb {
     flex: none;
-    width: 124px;
+    width: 92px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     border-left: 0;
-    padding: 4px 4px 8px;
+    padding: 2px 2px 6px;
     scroll-snap-align: start;
   }
 
@@ -1028,7 +1032,8 @@ a:focus-visible {
   }
 
   .stage-title {
-    font-size: clamp(18px, 1.5vh, 22px);
+    font-size: clamp(16px, 1.35vh, 20px);
+    line-height: 1.4;
   }
 }
 
