@@ -947,23 +947,28 @@ a:focus-visible {
     min-height: 100svh;
     height: 100svh;
     overflow: hidden;
-    padding: clamp(16px, 2.2vh, 22px) clamp(18px, 3.6vw, 28px);
+    padding: clamp(24px, 3.6vh, 34px) clamp(26px, 5.4vw, 42px);
   }
 
   .archive-poster .poster-header {
-    padding-bottom: 6px;
+    padding-bottom: clamp(12px, 2vh, 18px);
+  }
+
+  .archive-poster .header-logo {
+    height: clamp(22px, 3.4vh, 32px);
+    max-width: 130px;
   }
 
   .page-content.gallery-page {
     height: 100%;
     overflow: hidden;
-    padding: 0 clamp(4px, 2vw, 16px);
+    padding: 0 clamp(10px, 3.6vw, 22px);
   }
 
   .gallery {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    gap: 8px;
+    gap: 12px;
     overflow: hidden;
     height: 100%;
   }
@@ -980,8 +985,8 @@ a:focus-visible {
     height: auto;
     display: flex;
     flex-direction: row;
-    gap: 16px;
-    padding: 6px 0 8px;
+    gap: 20px;
+    padding: 8px 0 12px;
     scroll-snap-type: x mandatory;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
@@ -1001,12 +1006,12 @@ a:focus-visible {
 
   .gallery-thumb {
     flex: none;
-    width: 78px;
+    width: 56px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
     border-left: 0;
-    padding: 2px 2px 6px;
+    padding: 1px 1px 4px;
     scroll-snap-align: start;
   }
 
@@ -1023,8 +1028,8 @@ a:focus-visible {
     grid-row: auto;
     align-self: center;
     padding-top: 0;
-    font-size: 8px;
-    letter-spacing: 0.16em;
+    font-size: 7px;
+    letter-spacing: 0.14em;
     opacity: 0.7;
   }
 
@@ -1033,7 +1038,7 @@ a:focus-visible {
     text-align: center;
     width: 100%;
     min-width: 0;
-    gap: 2px;
+    gap: 1px;
     height: auto;
   }
 
@@ -1045,40 +1050,50 @@ a:focus-visible {
     min-width: 0;
     max-height: none;
     line-height: 1.2;
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .gallery-thumb .thumb-sub {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 8px;
-    letter-spacing: 0.08em;
+    font-size: 7px;
+    letter-spacing: 0.06em;
     opacity: 0.78;
   }
 
   .stage-img-wrap {
-    flex: 1 1 0;
-    min-height: 0;
+    flex: 1 1 52vh;
+    min-height: 48vh;
     height: auto;
-    min-height: auto;
   }
 
   .stage-title {
     flex: none;
-    padding: clamp(14px, 2.2vh, 20px) 0 clamp(8px, 1.2vh, 12px);
-    font-size: clamp(15px, 1.35vh, 20px);
-    line-height: 1.4;
+    padding: clamp(20px, 3vh, 30px) 0 clamp(14px, 2vh, 20px);
+    font-size: clamp(16px, 1.5vh, 22px);
+    line-height: 1.45;
   }
 
   .stage-info {
     flex: none;
-    padding: clamp(8px, 1.2vh, 12px) 0 clamp(28px, 4vh, 44px);
+    padding: clamp(14px, 2vh, 20px) 0 clamp(36px, 5vh, 52px);
+    gap: 10px;
+  }
+
+  .stage-line {
+    font-size: clamp(11px, 1vh, 13px);
+    letter-spacing: 0.14em;
+  }
+
+  .stage-size {
+    font-size: clamp(10px, 0.9vh, 12px);
+    letter-spacing: 0.08em;
   }
 
   .stage-nav {
     flex: none;
-    padding: 0 0 clamp(24px, 3.5vh, 40px);
+    padding: 0 0 clamp(32px, 4.5vh, 48px);
   }
 
   .stage-prev,
