@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# Build / share artifacts not part of the site
+qr-v1.7.png
