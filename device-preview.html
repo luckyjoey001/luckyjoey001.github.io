@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>设备预览 · JOEYLU Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f7f4ed;
+        --ink: #0d0d0c;
+        --line: rgba(13, 13, 12, 0.12);
+        --muted: rgba(13, 13, 12, 0.55);
+        --soft: #ece7da;
+        --accent: #8a7f6a;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        min-height: 100vh;
+        background: var(--soft);
+        color: var(--ink);
+        font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .preview-shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(20px, 3vh, 36px) clamp(20px, 4vw, 56px) clamp(32px, 5vh, 56px);
+      }
+
+      /* ---------- Top bar ---------- */
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-bottom: clamp(18px, 2.5vh, 28px);
+        border-bottom: 1px solid var(--line);
+        margin-bottom: clamp(28px, 4vh, 44px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+      }
+
+      .brand-title {
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+        font-size: clamp(20px, 2vw, 26px);
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+
+      .brand-sub {
+        font-size: clamp(11px, 0.9vw, 13px);
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .page-switch {
+        display: flex;
+        gap: 4px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px;
+      }
+
+      .page-switch button {
+        appearance: none;
+        background: none;
+        border: 0;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font: inherit;
+        font-size: clamp(12px, 0.95vw, 14px);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 200ms ease;
+      }
+
+      .page-switch button:hover {
+        color: var(--ink);
+      }
+
+      .page-switch button.is-active {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .hint {
+        font-size: clamp(11px, 0.85vw, 13px);
+        letter-spacing: 0.14em;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* ---------- Device stage ---------- */
+      .device-stage {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: clamp(28px, 4vw, 56px);
+        align-items: start;
+      }
+
+      /* ---------- Desktop frame ---------- */
+      .desktop-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .device-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: clamp(11px, 0.85vw, 13px);
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .device-label .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .desktop-frame {
+        background: #2a2a28;
+        border-radius: 12px;
+        padding: 10px 10px 0;
+        box-shadow: 0 24px 60px -20px rgba(13, 13, 12, 0.35),
+          0 8px 20px -10px rgba(13, 13, 12, 0.18);
+        overflow: hidden;
+      }
+
+      .browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 4px 10px;
+      }
+
+      .browser-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .browser-dots span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+
+      .browser-dots span:nth-child(1) {
+        background: #ff5f57;
+      }
+      .browser-dots span:nth-child(2) {
+        background: #febc2e;
+      }
+      .browser-dots span:nth-child(3) {
+        background: #28c840;
+      }
+
+      .browser-url {
+        flex: 1;
+        background: #1d1d1b;
+        color: rgba(247, 244, 237, 0.6);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        padding: 7px 14px;
+        border-radius: 6px;
+        font-family: -apple-system, "SF Mono", Menlo, monospace;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .desktop-viewport {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1440 / 860;
+        background: var(--paper);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .desktop-viewport iframe {
+        position: absolute;
+        inset: 0;
+        width: 1440px;
+        height: 860px;
+        border: 0;
+        transform-origin: top left;
+      }
+
+      /* ---------- Mobile frame ---------- */
+      .mobile-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: sticky;
+        top: 20px;
+      }
+
+      .mobile-frame {
+        position: relative;
+        width: 360px;
+        height: 740px;
+        margin: 0 auto;
+        background: #1d1d1b;
+        border-radius: 44px;
+        padding: 12px;
+        box-shadow: 0 24px 60px -20px rgba(13, 13, 12, 0.35),
+          0 8px 20px -10px rgba(13, 13, 12, 0.18);
+      }
+
+      .mobile-frame::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 26px;
+        background: #1d1d1b;
+        border-radius: 0 0 16px 16px;
+        z-index: 10;
+      }
+
+      .mobile-frame::after {
+        content: "";
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 4px;
+        background: rgba(247, 244, 237, 0.5);
+        border-radius: 2px;
+        z-index: 10;
+      }
+
+      .mobile-viewport {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--paper);
+        border-radius: 34px;
+        overflow: hidden;
+      }
+
+      .mobile-viewport iframe {
+        position: absolute;
+        inset: 0;
+        width: 390px;
+        height: 716px;
+        border: 0;
+        transform-origin: top left;
+      }
+
+      /* ---------- Footer note ---------- */
+      .foot-note {
+        margin-top: clamp(28px, 4vh, 44px);
+        padding-top: clamp(18px, 2.5vh, 28px);
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: clamp(11px, 0.85vw, 13px);
+        letter-spacing: 0.14em;
+        color: var(--muted);
+      }
+
+      .foot-note .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .foot-note .status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #28c840;
+        box-shadow: 0 0 0 3px rgba(40, 200, 64, 0.2);
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 1100px) {
+        .device-stage {
+          grid-template-columns: 1fr;
+          gap: clamp(32px, 5vh, 56px);
+        }
+
+        .mobile-wrap {
+          position: static;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .top-bar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .page-switch {
+          overflow-x: auto;
+          max-width: 100%;
+        }
+
+        .mobile-frame {
+          width: 280px;
+          height: 580px;
+        }
+
+        .mobile-viewport iframe {
+          width: 304px;
+          height: 560px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview-shell">
+      <header class="top-bar">
+        <div class="brand">
+          <span class="brand-title">JOEYLU</span>
+          <span class="brand-sub">Device Preview · 设备预览</span>
+        </div>
+
+        <nav class="page-switch" id="pageSwitch" aria-label="切换预览页面">
+          <button data-page="index.html" class="is-active" type="button">Home</button>
+          <button data-page="profile.html" type="button">Profile</button>
+          <button data-page="calligraphy.html" type="button">Calligraphy</button>
+          <button data-page="photography.html" type="button">Photography</button>
+        </nav>
+
+        <span class="hint">desktop 1440 · mobile 390</span>
+      </header>
+
+      <section class="device-stage">
+        <!-- Desktop -->
+        <div class="desktop-wrap">
+          <div class="device-label">
+            <span class="dot"></span>
+            <span>Desktop · 桌面端</span>
+          </div>
+          <div class="desktop-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="browser-url" id="desktopUrl">localhost:8000/index.html</div>
+            </div>
+            <div class="desktop-viewport" id="desktopViewport">
+              <iframe id="desktopFrame" src="http://localhost:8000/index.html" title="桌面端预览"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="mobile-wrap">
+          <div class="device-label">
+            <span class="dot"></span>
+            <span>Mobile · 手机端</span>
+          </div>
+          <div class="mobile-frame">
+            <div class="mobile-viewport" id="mobileViewport">
+              <iframe id="mobileFrame" src="http://localhost:8000/index.html" title="手机端预览"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot-note">
+        <span class="status">本地服务器运行中 · localhost:8000</span>
+        <span>JOEYLU / 甲乙 · Personal Archive</span>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        var switcher = document.getElementById("pageSwitch");
+        var desktopFrame = document.getElementById("desktopFrame");
+        var mobileFrame = document.getElementById("mobileFrame");
+        var desktopUrl = document.getElementById("desktopUrl");
+        var desktopViewport = document.getElementById("desktopViewport");
+        var mobileViewport = document.getElementById("mobileViewport");
+
+        var BASE = "http://localhost:8000/";
+
+        function setPage(page) {
+          var url = BASE + page;
+          desktopFrame.src = url;
+          mobileFrame.src = url;
+          desktopUrl.textContent = "localhost:8000/" + page;
+
+          // update active state
+          var btns = switcher.querySelectorAll("button");
+          btns.forEach(function (b) {
+            b.classList.toggle("is-active", b.dataset.page === page);
+          });
+        }
+
+        switcher.addEventListener("click", function (e) {
+          var btn = e.target.closest("button");
+          if (!btn) return;
+          setPage(btn.dataset.page);
+        });
+
+        // Scale iframes to fit their viewports responsively
+        function scaleFrames() {
+          // Desktop: source 1440x860 -> fit container width
+          var dRect = desktopViewport.getBoundingClientRect();
+          var dScale = Math.min(dRect.width / 1440, dRect.height / 860);
+          desktopFrame.style.transform = "scale(" + dScale + ")";
+
+          // Mobile: source 390x716 -> fit container width
+          var mRect = mobileViewport.getBoundingClientRect();
+          var mScale = Math.min(mRect.width / 390, mRect.height / 716);
+          mobileFrame.style.transform = "scale(" + mScale + ")";
+        }
+
+        window.addEventListener("resize", scaleFrames);
+        window.addEventListener("load", scaleFrames);
+        // Re-scale after iframes load (in case layout shifts)
+        desktopFrame.addEventListener("load", scaleFrames);
+        mobileFrame.addEventListener("load", scaleFrames);
+      })();
+    </script>
+  </body>
+</html>

@@ -470,11 +470,13 @@ a:focus-visible {
 }
 
 .profile-subtitle {
-  margin: 0 0 clamp(20px, 3vh, 32px);
+  margin: 0 0 clamp(24px, 3.6vh, 40px);
   color: var(--muted);
-  font-size: clamp(14px, 1.1vw, 17px);
-  letter-spacing: 0.22em;
-  font-style: italic;
+  font-size: clamp(12px, 0.9vw, 15px);
+  letter-spacing: 0.32em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 .lang-panel {
@@ -504,8 +506,9 @@ a:focus-visible {
   padding: 0 0 4px;
   list-style: none;
   color: var(--ink);
-  font-size: clamp(13px, 1vw, 15px);
-  line-height: 1.6;
+  font-size: clamp(12px, 0.92vw, 14px);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
 .profile-list li {
@@ -571,6 +574,21 @@ a:focus-visible {
     border-left: none;
   }
 
+  .profile-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    margin-bottom: clamp(22px, 3vh, 30px);
+  }
+
+  .profile-list {
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .profile-list li {
+    padding: 12px 0;
+  }
+
   .profile-text-body {
     max-width: 640px;
   }
@@ -585,10 +603,26 @@ a:focus-visible {
     padding: clamp(18px, 4vw, 28px);
   }
 
+  .profile-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    margin-bottom: clamp(18px, 2.6vh, 24px);
+  }
+
+  .profile-list {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
   .profile-list li {
     grid-template-columns: 1fr;
     gap: 2px;
-    padding: 8px 0;
+    padding: 10px 0;
+  }
+
+  .profile-list-date {
+    display: block;
+    margin-bottom: 2px;
   }
 
   .back-link {
@@ -957,7 +991,7 @@ a:focus-visible {
     min-height: 100svh;
     height: 100svh;
     overflow: hidden;
-    padding: clamp(24px, 3.6vh, 34px) clamp(26px, 5.4vw, 42px);
+    padding: clamp(28px, 4.2vh, 40px) clamp(30px, 6vw, 48px);
   }
 
   .archive-poster .poster-header {
@@ -965,8 +999,8 @@ a:focus-visible {
   }
 
   .archive-poster .header-logo {
-    height: clamp(22px, 3.4vh, 32px);
-    max-width: 130px;
+    height: clamp(20px, 3.2vh, 30px);
+    max-width: 120px;
   }
 
   .page-content.gallery-page {
@@ -1119,7 +1153,20 @@ a:focus-visible {
 
 @media (max-width: 900px) {
   .poster {
-    padding: 30px 26px;
+    padding: 36px 30px;
+  }
+
+  .frame {
+    inset: 14px;
+  }
+
+  .header-stack {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+
+  .header-stack span {
+    font-size: 10px;
   }
 
   .logo-lockup {
@@ -1152,11 +1199,11 @@ a:focus-visible {
 @media (max-width: 560px) {
   .poster {
     min-height: 100svh;
-    padding: 26px 20px;
+    padding: 32px 26px;
   }
 
   .frame {
-    inset: 9px;
+    inset: 11px;
   }
 
   .poster-header {
@@ -1164,12 +1211,12 @@ a:focus-visible {
   }
 
   .header-stack {
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 0.1em;
   }
 
   .header-stack span {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .logo-lockup {
@@ -1183,7 +1230,7 @@ a:focus-visible {
   .entry-nav {
     width: 64vw;
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     font-size: 10px;
     letter-spacing: 0.12em;
   }
