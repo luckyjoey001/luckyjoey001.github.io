@@ -785,8 +785,8 @@ a:focus-visible {
 }
 
 .thumb-title {
-  font-family: "Ma Shan Zheng", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
-  font-size: clamp(11px, 0.85vw, 13px);
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-size: clamp(12px, 0.9vw, 14px);
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -1011,6 +1011,12 @@ a:focus-visible {
   .gallery-thumb .thumb-meta {
     align-items: center;
     text-align: center;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gallery-thumb .thumb-title {
+    min-width: 0;
   }
 
   .gallery-stage {
