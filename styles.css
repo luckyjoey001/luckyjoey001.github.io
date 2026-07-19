@@ -591,9 +591,24 @@ a:focus-visible {
 
 .archive-poster {
   grid-template-rows: auto 1fr;
-  height: 100svh;
   min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
+  padding: clamp(18px, 2.6vw, 36px) clamp(22px, 3.2vw, 48px);
+}
+
+.archive-poster .poster-header {
+  padding-bottom: clamp(10px, 1.4vh, 16px);
+}
+
+.archive-poster .header-stack {
+  font-size: clamp(13px, 1.05vw, 17px);
+  gap: 1px;
+}
+
+.archive-poster .header-logo {
+  height: clamp(18px, 2.8vh, 28px);
+  max-width: 120px;
 }
 
 .archive-poster .page-content {
@@ -628,7 +643,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: clamp(16px, 2.2vw, 32px);
-  padding: clamp(16px, 2.4vh, 28px) 0;
+  padding: clamp(12px, 1.6vh, 18px) 0;
 }
 
 .gallery-wordmark {
@@ -641,26 +656,26 @@ a:focus-visible {
 
 .gallery-label {
   font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
-  font-size: clamp(14px, 1.15vw, 17px);
+  font-size: clamp(13px, 1.05vw, 16px);
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--muted);
   white-space: nowrap;
 }
 
 /*
  * Gallery — two independent columns inside a fixed-height container.
- * Left: thumb list (scrolls on its own). Right: stage (one screen, no scroll).
+ * Left: thumb list (scrolls on its own). Right: stage (scrolls to reveal info).
  * The page itself never scrolls — each column manages its own overflow.
  */
 .gallery {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(248px, 300px) 1fr;
-  gap: clamp(40px, 5vw, 72px);
+  grid-template-columns: minmax(220px, 260px) 1fr;
+  gap: clamp(32px, 4vw, 56px);
   overflow: hidden;
-  padding: clamp(4px, 1vh, 12px) 0;
+  padding: 0 0 clamp(4px, 1vh, 12px);
 }
 
 /* Left: thumb list — independently scrollable, page stays put */
@@ -675,6 +690,8 @@ a:focus-visible {
   padding: 4px 12px 4px 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .gallery-list::-webkit-scrollbar {
@@ -772,31 +789,39 @@ a:focus-visible {
   color: var(--muted);
 }
 
-/* Right: stage — one screen, vertically centered, no scroll.
-   The stage never scrolls; the user switches works via PREV/NEXT/keys. */
+/* Right: stage — scrolls vertically; image fills the first screen, info below. */
 .gallery-stage {
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: clamp(14px, 2vh, 22px);
+  gap: clamp(18px, 2.4vh, 28px);
   max-width: 560px;
   width: 100%;
   margin: 0 auto;
-  padding: clamp(8px, 1.5vh, 16px) 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Stage image — flexes to fill available vertical space while keeping the whole
-   work fully visible (object-fit: contain, no crop). */
+.gallery-stage::-webkit-scrollbar {
+  width: 4px;
+}
+
+.gallery-stage::-webkit-scrollbar-thumb {
+  background: var(--line);
+}
+
+/* Stage image — fills the first screen while keeping the whole work fully
+   visible (object-fit: contain, no crop). */
 .stage-img-wrap {
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   min-height: 0;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
   max-height: 100%;
   overflow: hidden;
   background: var(--paper);
@@ -824,8 +849,8 @@ a:focus-visible {
   gap: 6px;
   width: 100%;
   max-width: 440px;
-  padding-top: clamp(8px, 1.4vh, 16px);
-  border-top: 1px solid var(--line);
+  padding: clamp(10px, 1.4vh, 18px) 0 clamp(16px, 2.4vh, 28px);
+  flex: none;
 }
 
 .stage-title {
@@ -850,16 +875,6 @@ a:focus-visible {
   font-size: clamp(11px, 0.8vw, 12.5px);
   letter-spacing: 0.1em;
   opacity: 0.85;
-}
-
-.stage-notes {
-  margin: clamp(4px, 0.6vh, 8px) 0 0;
-  color: var(--muted);
-  font-size: clamp(12px, 0.9vw, 14px);
-  line-height: 1.6;
-  font-style: italic;
-  opacity: 0.85;
-  max-width: 420px;
 }
 
 /* Editable fields */
@@ -916,91 +931,31 @@ a:focus-visible {
   letter-spacing: 0.2em;
 }
 
-/* Gallery foot — fixed at bottom of the page */
-.gallery-foot {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: clamp(12px, 1.8vh, 20px) 0 clamp(8px, 1.2vh, 14px);
-  border-top: 1px solid var(--line);
-}
-
-/* Back button (left in gallery foot) */
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 0;
-  color: var(--muted);
-  font-size: clamp(11px, 0.85vw, 13px);
-  letter-spacing: 0.22em;
-  text-decoration: none;
-  transition: color 180ms ease, gap 180ms ease;
-}
-
-.back-btn:hover {
-  color: var(--ink);
-  gap: 12px;
-}
-
-.export-btn {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 10px 0;
-  color: var(--muted);
-  font: inherit;
-  font-size: clamp(11px, 0.85vw, 13px);
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  transition: color 180ms ease;
-}
-
-.export-btn:hover {
-  color: var(--ink);
-}
-
-/* Toast */
-.export-toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  padding: 10px 18px;
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 200ms ease, transform 200ms ease;
-  z-index: 60;
-}
-
-.export-toast.is-visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
 /* Gallery responsive — small screens switch to scrollable single column */
 @media (max-width: 900px) {
   .archive-poster {
-    height: auto;
     min-height: 100svh;
-    overflow: visible;
+    height: 100svh;
+    overflow: hidden;
+    padding: clamp(16px, 2.2vh, 22px) clamp(18px, 3.6vw, 28px);
+  }
+
+  .archive-poster .poster-header {
+    padding-bottom: 6px;
   }
 
   .page-content.gallery-page {
-    height: auto;
-    overflow: visible;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 clamp(4px, 2vw, 16px);
   }
 
   .gallery {
     grid-template-columns: 1fr;
-    gap: clamp(24px, 4vw, 40px);
-    overflow: visible;
+    grid-template-rows: auto 1fr;
+    gap: 8px;
+    overflow: hidden;
+    height: 100%;
   }
 
   .gallery-list {
@@ -1010,7 +965,10 @@ a:focus-visible {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    padding: 4px 0 12px;
+    padding: 4px 0 8px;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .gallery-thumb {
@@ -1021,6 +979,7 @@ a:focus-visible {
     gap: 6px;
     border-left: 0;
     padding: 4px 4px 8px;
+    scroll-snap-align: start;
   }
 
   .gallery-thumb.is-active {
@@ -1042,14 +1001,28 @@ a:focus-visible {
   }
 
   .gallery-stage {
-    overflow: visible;
-    height: auto;
-    max-width: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    min-height: 0;
+    max-width: 100%;
     margin: 0 auto;
+    padding: 0 0 clamp(12px, 3vh, 24px);
   }
 
   .stage-img-wrap {
-    height: clamp(260px, 48vh, 420px);
+    flex: 1 1 100%;
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .stage-info {
+    padding: clamp(12px, 2vh, 20px) 0 clamp(16px, 3vh, 28px);
+  }
+
+  .stage-title {
+    font-size: clamp(18px, 1.5vh, 22px);
   }
 }
 

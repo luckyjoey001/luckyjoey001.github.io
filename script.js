@@ -1,7 +1,7 @@
 // Calligraphy gallery: museum view — left thumb list, right stage.
-// 21 works, vertical postcard format. Description fields are editable
-// and auto-saved to localStorage so the user can fill in titles, years,
-// dimensions, and notes without touching code.
+// 21 works, vertical postcard format. Titles, year/style, and dimensions are
+// editable and auto-saved to localStorage so the user can curate metadata
+// without touching code.
 (function () {
   const list = document.querySelector(".gallery-list");
   const stage = document.querySelector(".gallery-stage");
@@ -24,12 +24,117 @@
     seal: "篆书",
   };
 
+  // Default edits baked into the site. These values were entered by the user
+  // in the browser and exported via the "EXPORT EDITS" button; they now serve
+  // as the initial content so the site displays the curated titles / years / sizes
+  // even for first-time visitors or after clearing localStorage.
+  const DEFAULT_EDITS = {
+    "01": {
+      title: "度一切苦厄",
+      line: "2025 · 行书",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "02": {
+      title: "世界是一个巨大的游乐场",
+      line: "2025 · 行书",
+      size: "10 × 14 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "03": {
+      title: "浮生若梦",
+      line: "2025 · 行草",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "04": {
+      title: "福",
+      line: "2025 · 篆书",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "05": {
+      title: "心月同光· 梦里乾坤",
+      line: "2025 · 篆书/ 隶书",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "06": {
+      title: "穿越周期",
+      line: "2025 · 行书",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "08": {
+      title: "满船星梦压星河",
+      line: "2024 · 草书",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "09": {
+      title: "上善若水",
+      line: "2024 · 行草",
+    },
+    "10": {
+      title: "如愿",
+      line: "2024 · 行草",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "11": {
+      title: "上善若水",
+      line: "2025 · 隶",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "12": {
+      line: "2025 · 草书",
+      size: "21 × 29 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "13": {
+      title: "天真",
+      line: "2025 ",
+      size: "15 × 15 cm · 和纸 Ink on xuan paper",
+    },
+    "14": {
+      title: "觉",
+      line: "2025 · 行书",
+    },
+    "15": {
+      title: "夏风深深 有如海浪",
+      line: "2024 · 行草",
+      size: "21 × 29 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "16": {
+      title: "我的心略大于整个宇宙",
+      line: "2025 · 隶书/行书",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "17": {
+      title: "每个情绪都标明了颜色，或哭或笑，都是甜色",
+      line: "2025 · 行草",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "18": {
+      title: "天真",
+      line: "2024 · 行书",
+      size: "138 × 69 cm · 水墨卡纸 Ink on xuan paper",
+    },
+    "19": {
+      title: "Burning Child Loves the Fire",
+      line: "2025 · 英文花体",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "20": {
+      title: "蓝色 · 宇宙之爱",
+      line: "2025 · 行书",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+    "21": {
+      title: "允许一切发生",
+      line: "2024 · 行草",
+      size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
+    },
+  };
+
   // ----- persistence -----
   function loadEdits() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      return { ...DEFAULT_EDITS, ...saved };
     } catch (e) {
-      return {};
+      return { ...DEFAULT_EDITS };
     }
   }
 
@@ -78,8 +183,6 @@
       let val;
       if (data[field] != null) {
         val = data[field];
-      } else if (field === "notes") {
-        val = ""; // leave empty so :empty::before shows the hint
       } else if (field === "line") {
         val = f.dataset.placeholder || "";
       } else {
@@ -88,6 +191,9 @@
       f.textContent = val;
     });
 
+    // Reset scroll so the new work is shown from the top.
+    stage.scrollTop = 0;
+
     setCounter();
   }
 
@@ -95,8 +201,10 @@
   thumbs.forEach((t) => {
     const idx = t.dataset.index;
     const titleEl = t.querySelector(".thumb-title");
-    if (edits[idx] && edits[idx].title && titleEl) {
-      titleEl.textContent = edits[idx].title;
+    const subEl = t.querySelector(".thumb-sub");
+    if (edits[idx]) {
+      if (edits[idx].title && titleEl) titleEl.textContent = edits[idx].title;
+      if (edits[idx].line && subEl) subEl.textContent = edits[idx].line;
     }
   });
 
