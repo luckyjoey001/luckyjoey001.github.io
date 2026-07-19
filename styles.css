@@ -789,18 +789,15 @@ a:focus-visible {
   color: var(--muted);
 }
 
-/* Right: stage — scrolls vertically; image fills the first screen, info below. */
+/* Right: stage — scrolls vertically; image fills the first screen, info below.
+   Stage uses block layout (not flex) so .stage-img-wrap can reliably take
+   100% of the visible height, matching the left thumb column's height. */
 .gallery-stage {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(18px, 2.4vh, 28px);
-  max-width: 560px;
   width: 100%;
   margin: 0 auto;
   scroll-behavior: smooth;
@@ -815,14 +812,12 @@ a:focus-visible {
   background: var(--line);
 }
 
-/* Stage image — fills the first screen while keeping the whole work fully
-   visible (object-fit: contain, no crop). */
+/* Stage image — fills the entire first screen (top & bottom aligned with the
+   left thumb list). object-fit: contain keeps the work fully visible, no crop. */
 .stage-img-wrap {
-  flex: 1 1 100%;
-  min-height: 0;
-  width: 100%;
   height: 100%;
-  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
   overflow: hidden;
   background: var(--paper);
   display: flex;
@@ -849,8 +844,8 @@ a:focus-visible {
   gap: 6px;
   width: 100%;
   max-width: 440px;
-  padding: clamp(10px, 1.4vh, 18px) 0 clamp(16px, 2.4vh, 28px);
-  flex: none;
+  margin: 0 auto;
+  padding: clamp(24px, 4vh, 40px) 0 clamp(32px, 5vh, 56px);
 }
 
 .stage-title {
@@ -902,8 +897,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: clamp(16px, 2vw, 28px);
-  padding-top: 4px;
-  flex: none;
+  padding: 0 0 clamp(24px, 4vh, 40px);
 }
 
 .stage-prev,
@@ -1005,20 +999,17 @@ a:focus-visible {
     overflow-x: hidden;
     height: 100%;
     min-height: 0;
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 0 clamp(12px, 3vh, 24px);
   }
 
   .stage-img-wrap {
-    flex: 1 1 100%;
-    min-height: 0;
     height: 100%;
-    max-height: 100%;
+    min-height: 100%;
   }
 
   .stage-info {
-    padding: clamp(12px, 2vh, 20px) 0 clamp(16px, 3vh, 28px);
+    padding: clamp(16px, 3vh, 28px) 0 clamp(24px, 4vh, 36px);
   }
 
   .stage-title {
