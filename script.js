@@ -178,7 +178,7 @@
 
     const thumbImg = thumb.querySelector(".thumb-img");
     if (thumbImg && stageImg) {
-      stageImg.src = thumbImg.getAttribute("src");
+      stageImg.src = thumbImg.getAttribute("data-full") || thumbImg.getAttribute("src");
       stageImg.alt = thumbImg.alt || "";
     }
 
