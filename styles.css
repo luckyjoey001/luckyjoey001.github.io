@@ -202,6 +202,10 @@ a:focus-visible {
   transform: scaleX(1);
 }
 
+.home-poster .header-stack a[aria-current="page"]::after {
+  display: none;
+}
+
 .section-poster {
   grid-template-rows: auto 1fr auto;
 }
@@ -487,6 +491,12 @@ a:focus-visible {
   line-height: 1.8;
   color: var(--ink);
   letter-spacing: 0.01em;
+}
+
+.lang-panel[data-lang="zh"] .profile-body {
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 2;
+  letter-spacing: 0.08em;
 }
 
 .profile-list {
@@ -858,7 +868,7 @@ a:focus-visible {
 }
 
 .stage-title {
-  margin: 0;
+  margin: 0 auto;
   padding: clamp(48px, 7vh, 88px) 0 clamp(16px, 2vh, 24px);
   font-family: "Italiana", "Playfair Display", "Ma Shan Zheng", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
   font-size: clamp(18px, 1.55vw, 26px);
