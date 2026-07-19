@@ -59,6 +59,11 @@
       line: "2025 · 行书",
       size: "10 × 10 cm · 水墨宣纸 Ink on xuan paper",
     },
+    "07": {
+      title: "万类霜天竞自由",
+      line: "2024 · 行草",
+      size: "15 × 15 cm · 水墨宣纸 Ink on xuan paper",
+    },
     "08": {
       title: "满船星梦压星河",
       line: "2024 · 草书",
